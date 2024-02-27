@@ -4,6 +4,7 @@ const fromCurrencyEl = document.querySelector('.fromCurrency');
 const toCurrencyEl = document.querySelector('.toCurrency');
 const resultEl = document.querySelector('.result');
 const converterContainer = document.querySelector('.converter-container');
+const arrowEl = document.querySelector('.arrow');
 
 //Array to populate the select tags with these countries
 const countries = [
@@ -216,6 +217,16 @@ const getExchangeRate = async () => {
         converterContainer.innerHTML = `<h2>Error while fetching exchange rates!!!</h2>`;
     }
 }
+
+// Event listener for the arrow element (swap functionality)
+arrowEl.addEventListener('click', () => {
+    // Swap the values
+    [fromCurrencyEl.value, toCurrencyEl.value] = [toCurrencyEl.value, fromCurrencyEl.value];
+
+    // Update the exchange rate
+    getExchangeRate();
+    // arrowEl.classList.toggle('rotate-half');
+});
 
 //Fetching exchange rate when user inputs the amount
 fromAmountEl.addEventListener('input', getExchangeRate);
